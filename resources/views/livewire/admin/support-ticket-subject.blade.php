@@ -14,7 +14,7 @@
         <!-- Ticket Subject Input -->
         <div>
             <x-input-label for="ticket_subject" :value="__('Ticket Subject')" />
-            <x-text-input wire:model="ticket_subject" id="ticket_subject" class="block mt-1 w-full border" type="text"
+            <x-text-input wire:model="ticket_subject" id="ticket_subject" class="block mt-1 w-full border px-3 py-2" type="text"
                 name="ticket_subject" required />
             <x-input-error :messages="$errors->get('ticket_subject')" class="mt-2" />
         </div>
@@ -23,7 +23,7 @@
         <div class="mt-4">
             <x-input-label for="description" :value="__('Description (Optional)')" />
             <textarea wire:model="description" id="description"
-                class="block mt-1 w-full border border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"></textarea>
+                class="block mt-1 w-full border px-3 py-2 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"></textarea>
             <x-input-error :messages="$errors->get('description')" class="mt-2" />
         </div>
 
