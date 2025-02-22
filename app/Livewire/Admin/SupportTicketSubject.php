@@ -31,6 +31,8 @@ class SupportTicketSubject extends Component
 
     public function render()
     {
-        return view('livewire.admin.support-ticket-subject');   
+        return view('livewire.admin.support-ticket-subject',[
+            'subjects' => ModelsSupportTicketSubject::latest()->get(),
+        ]);   
     }
 }
