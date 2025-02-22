@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('support_ticket_subjects', function (Blueprint $table) {
             $table->id();
-            $table->string('ticket-subject');
+            $table->string('ticket_subject');
             $table->text('description')->nullable();
             $table->timestamps();
         });
