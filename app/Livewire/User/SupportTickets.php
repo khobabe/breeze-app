@@ -7,9 +7,7 @@ use App\Models\SupportTicketSubject;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
-use Livewire\WithFileUploads; 
-
-
+use Livewire\WithFileUploads;
 
 #[Layout("layouts.users")]
 class SupportTickets extends Component
@@ -38,17 +36,23 @@ class SupportTickets extends Component
             'department' => 'required|string',
             'main_product' => 'required|string',
             'domain' => 'required|string',
+            'attachment' => 'nullable|file|max:2048',
         ]);
 
+        $filePath = null;
+        if ($this->attachment) {
+            $filePath = $this->attachment->store('attachments', 'public');
+        }
+
         SupportTicket::create([
-            'ticket_number' => 'TICKET-' . strtoupper(uniqid()), 
+            'ticket_number' => 'TICKET-' . strtoupper(uniqid()),
             'user_id' => Auth::id(),
             'ticket_subject_id' => $this->ticket_subject_id,
             'description' => $this->description,
             'department' => $this->department,
             'main_product' => $this->main_product,
             'domain' => $this->domain,
-            'status' => 'processing',
+            'attachment' => $filePath, // Save file path in DB
         ]);
 
         session()->flash('message', 'Support ticket created successfully!');

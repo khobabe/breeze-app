@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Livewire\Admin\AdminDashboard;
 use App\Livewire\Admin\SupportTicketSubject;
 use App\Livewire\User\SupportTickets;
+use App\Livewire\User\TicketDetail;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -16,6 +17,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
 
     Route::get('/support/tickets', SupportTickets::class)->name('support.tickets');
+    Route::get('/support/tickets/{ticketId}', TicketDetail::class)->name('ticket.view');
+
 });
 
 

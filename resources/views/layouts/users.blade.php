@@ -15,7 +15,7 @@
     <!-- Header -->
     <header class="bg-white shadow p-4">
         <div class="container mx-auto flex justify-between items-center">
-            <a href="{{ route('support.tickets') }}" class="text-lg font-semibold">Ticket Management</a>
+            <a href="{{ route('support.tickets') }}" wire:navigate class="text-lg font-semibold">Ticket Management</a>
             <div>
                 <a href="#" class="text-gray-700 hover:text-gray-900 px-4">Profile</a>
                 <a href="#" class="text-gray-700 hover:text-gray-900 px-4">Settings</a>
@@ -26,13 +26,13 @@
 
     <div class="flex">
         <!-- Sidebar -->
-        <aside class="w-64 bg-white shadow h-screen p-4">
+        <aside class="w-64 bg-white shadow p-4">
             <ul class="space-y-4">
-                <li><a href="{{ route('support.tickets') }}" class="block text-gray-700 hover:text-gray-900">Dashboard</a>
+                <li><a href="{{ route('support.tickets') }}" wire:navigate class="block text-gray-700 hover:text-gray-900">Dashboard</a>
                 </li>
-                <li><a href="{{ route('support.tickets') }}" class="block text-gray-700 hover:text-gray-900">Support
+                <li><a href="{{ route('support.tickets') }}" wire:navigate class="block text-gray-700 hover:text-gray-900">Support
                         Tickets</a></li>
-                <li><a href="#" class="block text-gray-700 hover:text-gray-900">Generate Tickets</a></li>
+                <li><a href="{{ route('support.tickets') }}" wire:navigate class="block text-gray-700 hover:text-gray-900">Generate Tickets</a></li>
                 <li><a href="#" class="block text-gray-700 hover:text-gray-900">Orders</a></li>
                 <li><a href="#" class="block text-gray-700 hover:text-gray-900">Messages</a></li>
             </ul>
