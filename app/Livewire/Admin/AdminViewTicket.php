@@ -13,8 +13,8 @@ class AdminViewTicket extends Component
     public $message = "";
     public $adminMessages = [];
 
-     // Listen for the event
-     protected $listeners = ['refreshMessages' => 'loadMessages'];
+    // Listen for the event
+    protected $listeners = ['refreshMessages' => 'loadMessages'];
 
     public function mount($ticketId)
     {
@@ -33,8 +33,9 @@ class AdminViewTicket extends Component
 
         ChatMessage::create($data);
 
-        $this->dispatch('refreshMessages');
         $this->message = "";
+        $this->dispatch('refreshMessages');
+        // $this->dispatchBrowserEvent('message-added'); // Auto-scroll event
     }
 
     public function loadMessages()

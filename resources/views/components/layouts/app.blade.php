@@ -38,10 +38,10 @@
             {{ $slot }}
         </main>
 
-        <!-- Footer -->
+        {{-- <!-- Footer -->
         <footer class="bg-gray-900 text-white text-center py-4">
             &copy; {{ date('Y') }} Admin Panel. All rights reserved.
-        </footer>
+        </footer> --}}
     </div>
 
 </body>

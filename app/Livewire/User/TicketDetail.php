@@ -16,14 +16,13 @@ class TicketDetail extends Component
     public $message = "";
     public $messages = [];
 
+    protected $listeners = ['refreshMessages' => 'loadMessages'];
+
     public function mount($ticketId)
     {
         $this->ticket = SupportTicket::with('support_ticket_subject')->findOrFail($ticketId);
 
-        $this->messages = ChatMessage::where('ticket_id', $ticketId)
-            ->with('user')
-            ->orderBy('created_at', 'asc')
-            ->get();
+        $this->loadMessages();
     }
 
     public function sendMessage()
@@ -36,7 +35,16 @@ class TicketDetail extends Component
 
         ChatMessage::create($data);
 
-        $this->message = ''; 
+        $this->dispatch('refreshMessages');
+        $this->message = '';
+    }
+
+    public function loadMessages()
+    {
+        $this->messages = ChatMessage::where('ticket_id', $this->ticket->id)
+            ->with('user')
+            ->orderBy('created_at', 'asc')
+            ->get();
     }
 
     public function render()

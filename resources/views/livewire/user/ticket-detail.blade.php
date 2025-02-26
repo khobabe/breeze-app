@@ -14,7 +14,7 @@
     <div class="mt-6">
         <h3 class="text-xl font-semibold mb-2">Chat</h3>
 
-        <div class="border p-3 rounded h-[400px] overflow-y-auto">
+        <div class="border p-3 rounded h-[350px] overflow-y-auto">
             @foreach ($messages as $msg)
                 <div
                     class="mb-2 p-2 rounded 
