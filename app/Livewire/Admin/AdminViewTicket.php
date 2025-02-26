@@ -13,19 +13,14 @@ class AdminViewTicket extends Component
     public $message = "";
     public $adminMessages = [];
 
+     // Listen for the event
+     protected $listeners = ['refreshMessages' => 'loadMessages'];
+
     public function mount($ticketId)
     {
         $this->ticket = SupportTicket::with('support_ticket_subject')->findOrFail($ticketId);
 
         $this->loadMessages();
-    }
-
-    public function loadMessages()
-    {
-        $this->adminMessages = ChatMessage::where('ticket_id', $this->ticket->id)
-            ->with('user')
-            ->orderBy('created_at', 'asc')
-            ->get();
     }
 
     public function sendMessageAdmin()
@@ -38,9 +33,16 @@ class AdminViewTicket extends Component
 
         ChatMessage::create($data);
 
-        $this->message = "";
-
         $this->dispatch('refreshMessages');
+        $this->message = "";
+    }
+
+    public function loadMessages()
+    {
+        $this->adminMessages = ChatMessage::where('ticket_id', $this->ticket->id)
+            ->with('user')
+            ->orderBy('created_at', 'asc')
+            ->get();
     }
 
     public function render()
