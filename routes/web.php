@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Livewire\Admin\AdminDashboard;
+use App\Livewire\Admin\AdminManageTickets;
+use App\Livewire\Admin\AdminViewTicket;
 use App\Livewire\Admin\SupportTicketSubject;
 use App\Livewire\User\SupportTickets;
 use App\Livewire\User\TicketDetail;
@@ -34,4 +36,6 @@ require __DIR__ . '/auth.php';
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/', AdminDashboard::class)->name('admin.dashboard');
     Route::get('/ticket-subject', SupportTicketSubject::class)->name('admin.ticket.subject');
+    Route::get('/manage-ticket',AdminManageTickets::class)->name('admin.manage.tickets');
+    Route::get('/manage-ticket/{ticketId}',AdminViewTicket::class)->name('admin.view.ticket');
 });

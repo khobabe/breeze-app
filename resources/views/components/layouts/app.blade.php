@@ -19,7 +19,7 @@
             <a href="{{ route('admin.dashboard') }}" class="block px-6 py-3 hover:bg-gray-700">Dashboard</a>
             <a href="#" class="block px-6 py-3 hover:bg-gray-700">Users</a>
             <a href="#" class="block px-6 py-3 hover:bg-gray-700">Settings</a>
-            <a href="#" class="block px-6 py-3 hover:bg-gray-700">Manage Tickets</a>
+            <a href="{{ route('admin.manage.tickets') }}" wire:navigate class="block px-6 py-3 hover:bg-gray-700">Manage Tickets</a>
             <a href="{{ route('admin.ticket.subject') }}" class="block px-6 py-3 hover:bg-gray-700">Tickets Subject</a>
             <a href="{{ route('logout') }}" class="block px-6 py-3 hover:bg-red-600">Logout</a>
         </nav>
