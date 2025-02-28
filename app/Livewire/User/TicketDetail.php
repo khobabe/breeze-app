@@ -20,10 +20,15 @@ class TicketDetail extends Component
 
     public function mount($ticketId)
     {
-        $this->ticket = SupportTicket::with('support_ticket_subject')->findOrFail($ticketId);
+        $this->ticket = SupportTicket::with(['support_ticket_subject', 'user'])->find($ticketId);
+
+        if (!$this->ticket) {
+            abort(404, 'Ticket not found');
+        }
 
         $this->loadMessages();
     }
+
 
     public function sendMessage()
     {

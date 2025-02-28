@@ -46,4 +46,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function tickets()
+    {
+        return $this->hasMany(SupportTicket::class, 'user_id');  // 'user_id' is the foreign key in tickets table
+    }
 }

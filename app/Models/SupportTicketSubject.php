@@ -14,4 +14,9 @@ class SupportTicketSubject extends Model
     {
         return $this->hasMany(SupportTicket::class, 'ticket_subject_id');
     }
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');  // 'user_id' is the foreign key in tickets table
+    }
 }
