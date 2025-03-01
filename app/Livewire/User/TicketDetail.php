@@ -27,8 +27,8 @@ class TicketDetail extends Component
             abort(404, 'Ticket not found');
         }
 
-        if(!Gate::allows('view-ticket',$this->ticket)){
-            abort(403,'Unauthorized Access');
+        if (!Gate::allows('view-ticket', $this->ticket)) {
+            abort(403, 'Unauthorized Access');
         }
 
         $this->loadMessages();
@@ -37,6 +37,12 @@ class TicketDetail extends Component
 
     public function sendMessage()
     {
+        // Check if the ticket is closed
+        if ($this->ticket->status === 'closed') {
+            session()->flash('error', 'Chat is disabled for this ticket.');
+            return;
+        }
+        
         $data = [
             'ticket_id' => $this->ticket->id,
             'user_id' => Auth::id(),

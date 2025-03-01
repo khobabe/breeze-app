@@ -25,6 +25,12 @@ class AdminViewTicket extends Component
 
     public function sendMessageAdmin()
     {
+        // Check if the ticket is closed
+        if ($this->ticket->status === 'closed') {
+            session()->flash('error', 'Chat is disabled for this ticket.');
+            return;
+        }
+        
         $data = [
             'ticket_id' => $this->ticket->id,
             'user_id' => Auth::id(),

@@ -39,7 +39,7 @@
             @foreach ($messages as $msg)
                 <div
                     class="mb-2 p-2 rounded 
-                    {{ $msg->user_id == auth()->id() ? 'bg-blue-100 text-right' : 'bg-gray-100 text-left' }}">
+                {{ $msg->user_id == auth()->id() ? 'bg-blue-100 text-right' : 'bg-gray-100 text-left' }}">
                     <p class="font-bold">{{ $msg->user->name }}</p>
                     <p>{{ $msg->content }}</p>
                     <p class="text-xs text-gray-500">{{ $msg->created_at->diffForHumans() }}</p>
@@ -47,10 +47,21 @@
             @endforeach
         </div>
 
-        <div class="mt-3 flex">
-            <input type="text" wire:model="message" class="border px-3 py-2 rounded w-full"
-                placeholder="Type your message...">
-            <button wire:click="sendMessage" class="ml-2 bg-blue-600 text-white px-4 py-2 rounded">Send</button>
-        </div>
+        <!-- Show input and send button only if the ticket is open -->
+        @if ($ticket->status !== 'closed')
+            <div class="mt-3 flex">
+                <input type="text" wire:model="message" class="border px-3 py-2 rounded w-full"
+                    placeholder="Type your message...">
+                <button wire:click="sendMessage" class="ml-2 bg-blue-600 text-white px-4 py-2 rounded">
+                    Send
+                </button>
+            </div>
+        @else
+            <!-- Show a message instead of input field when the ticket is closed -->
+            <div class="mt-3 p-3 bg-gray-100 rounded text-center text-gray-600">
+                <p>🔒 Chat is closed as this ticket has been resolved.</p>
+            </div>
+        @endif
     </div>
+
 </div>
