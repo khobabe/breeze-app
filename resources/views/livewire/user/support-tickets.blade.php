@@ -84,21 +84,24 @@
             <ul class="space-y-2">
                 @foreach ($tickets as $ticket)
                     <li class="p-3 border rounded shadow-sm cursor-pointer hover:bg-green-100">
-                        <a href="{{ route('ticket.view',$ticket->id) }}" wire:navigate>
-                            <strong class="text-lg">{{ $ticket->ticket_number }}
-                                {{-- {{ $ticket->ticket_subject->ticket_subject }} --}}
-                            </strong>
-                            <p class="text-sm mt-1"><strong>Subject:</strong> {{ $ticket->support_ticket_subject->ticket_subject }}</p>
-                            <p class="text-sm mt-1"><strong>Description:</strong>{{ $ticket->description }}</p>
-                            <p class="text-sm"><strong>Status:</strong> {{ ucfirst($ticket->status) }}</p>
-                            <p class="text-sm"><strong>Department:</strong> {{ $ticket->department }}</p>
-                            <p class="text-sm"><strong>Main Product:</strong> {{ $ticket->main_product }}</p>
-                            <p class="text-sm"><strong>Domain:</strong> {{ $ticket->domain }}</p>
-                            @if ($ticket->attachment)
-                                <p class="text-sm"><a href="{{ asset('storage/' . $ticket->attachment) }}"
-                                        class="text-blue-600 underline">View Attachment</a></p>
-                            @endif
-                        </a>
+                        @can('view', $ticket)
+                            <a href="{{ route('ticket.view', $ticket->id) }}" wire:navigate>
+                                <strong class="text-lg">{{ $ticket->ticket_number }}
+                                    {{-- {{ $ticket->ticket_subject->ticket_subject }} --}}
+                                </strong>
+                                <p class="text-sm mt-1"><strong>Subject:</strong>
+                                    {{ $ticket->support_ticket_subject->ticket_subject }}</p>
+                                <p class="text-sm mt-1"><strong>Description:</strong>{{ $ticket->description }}</p>
+                                <p class="text-sm"><strong>Status:</strong> {{ ucfirst($ticket->status) }}</p>
+                                <p class="text-sm"><strong>Department:</strong> {{ $ticket->department }}</p>
+                                <p class="text-sm"><strong>Main Product:</strong> {{ $ticket->main_product }}</p>
+                                <p class="text-sm"><strong>Domain:</strong> {{ $ticket->domain }}</p>
+                                @if ($ticket->attachment)
+                                    <p class="text-sm"><a href="{{ asset('storage/' . $ticket->attachment) }}"
+                                            class="text-blue-600 underline">View Attachment</a></p>
+                                @endif
+                            </a>
+                        @endcan
                     </li>
                 @endforeach
             </ul>

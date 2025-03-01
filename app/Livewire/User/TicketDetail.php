@@ -5,6 +5,7 @@ namespace App\Livewire\User;
 use App\Models\ChatMessage;
 use App\Models\SupportTicket;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
@@ -24,6 +25,10 @@ class TicketDetail extends Component
 
         if (!$this->ticket) {
             abort(404, 'Ticket not found');
+        }
+
+        if(!Gate::allows('view-ticket',$this->ticket)){
+            abort(403,'Unauthorized Access');
         }
 
         $this->loadMessages();
