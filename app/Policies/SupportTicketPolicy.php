@@ -24,6 +24,13 @@ class SupportTicketPolicy
         return $user->id === $supportTicket->user_id;
     }
 
+    public function close(User $user, SupportTicket $supportTicket): bool
+    {
+        return $user->id === $supportTicket->user_id; // Only the ticket owner can close it
+    }
+
+
+
     /**
      * Determine whether the user can create models.
      */

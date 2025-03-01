@@ -22,5 +22,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Gate::define('view-ticket',[SupportTicketPolicy::class,'view']);
+        Gate::define('close-ticket', [SupportTicketPolicy::class, 'close']); // Define close-ticket gate
+
     }
 }

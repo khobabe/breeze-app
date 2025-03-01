@@ -101,10 +101,26 @@
                                             class="text-blue-600 underline">View Attachment</a></p>
                                 @endif
                             </a>
+                            <!-- Close Ticket Button -->
+                            @if ($ticket->status !== 'closed')
+                                <button wire:click="closeTicket({{ $ticket->id }})"
+                                    class="mt-2 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
+                                    Close Ticket
+                                </button>
+                            @else
+                                <button class="mt-2 px-4 py-2 bg-gray-400 text-white rounded" disabled>
+                                    Closed
+                                </button>
+                            @endif
                         @endcan
                     </li>
                 @endforeach
             </ul>
         @endif
     </div>
+    <script>
+        Livewire.on('ticketClosed', (data) => {
+            alert('Ticket ' + data.ticketId + ' has been closed.');
+        });
+    </script>
 </div>

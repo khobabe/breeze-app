@@ -5,6 +5,7 @@ namespace App\Livewire\User;
 use App\Models\SupportTicket;
 use App\Models\SupportTicketSubject;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -61,6 +62,21 @@ class SupportTickets extends Component
         $this->reset(['ticket_subject_id', 'description', 'department', 'main_product', 'domain']);
     }
 
+    public function closeTicket($ticketId)
+    {
+        $ticket = SupportTicket::findOrFail($ticketId);
+
+        // Check authorization using Gate
+        if (!Gate::allows('close-ticket', $ticket)) {
+            abort(403, 'Unauthorized');
+        }
+
+        // Close the ticket
+        $ticket->update(['status' => 'closed']);
+
+        // Emit an event (optional)
+        $this->dispatch('ticketClosed', ['ticketId' => $ticket->id]);
+    }
 
 
     public function render()
