@@ -10,7 +10,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-gray-100 text-gray-900">
+<body class="text-gray-900">
 
     <!-- Header -->
     <header class="bg-white shadow p-4">
@@ -39,7 +39,7 @@
         </aside>
 
         <!-- Main Content -->
-        <main class="flex-1 p-6">
+        <main class="flex-1">
             {{ $slot }} {{-- This is where Livewire components will be rendered --}}
         </main>
     </div>
